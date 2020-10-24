@@ -16,15 +16,6 @@ class CreateCourse extends Component{
         materialsNeeded: '',
         errors: []
     }
-    componentDidMount(){
-        const {context} = this.props;
-
-        
-        // cheks if user is not autheticated then redirect to signin route
-        // if(!context.authenticatedUser){
-        //     this.props.history.push('/signin');
-        // }
-    }
     render(){
         // pull out properties from state object 
         const { title, description, estimatedTime, materialsNeeded, errors} = this.state;
@@ -84,7 +75,7 @@ class CreateCourse extends Component{
     submit = (e) => {
         e.preventDefault();
         
-        const {context} = this.props;
+        const {context, history} = this.props;
         // auth user
         const authUser = context.authenticatedUser;
 
@@ -104,7 +95,7 @@ class CreateCourse extends Component{
 
             // handle promise
             context.data.createCourse(course, authUser).then(() => {
-                this.props.history.push('/');
+                history.push('/');
             // handle errors
             }).catch(error => {
                 if(error.response.status === 400){
@@ -114,7 +105,7 @@ class CreateCourse extends Component{
                         }
                     })
                 }else if(error.response.status === 500){
-                    this.props.history.push('/error');
+                    history.push('/error');
                 }
             })
         }

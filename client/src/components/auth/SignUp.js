@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {NavLink} from "react-router-dom";
 import ErrorContainer from "../error/ErrorContainer";
-import Cookies from 'js-cookie';
+
 
 /**
  * @extends {CourseDetail} - Extends react stateful component.
@@ -95,7 +95,7 @@ class SignUp extends Component{
     submit = (e) => {
         e.preventDefault();
        
-       const {context, history, location} = this.props;
+       const {context, history} = this.props;
 
        // pull out properties from state object
        const {firstName, lastName, emailAddress, password, confirmPassword} = this.state;
