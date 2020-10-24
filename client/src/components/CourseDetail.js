@@ -15,6 +15,8 @@ class CourseDetail extends Component{
         course: {}
     }
     componentDidMount(){
+      console.log(this.props);
+
       // object destructuring
         const { match: {params: {id}}, context} = this.props;
       

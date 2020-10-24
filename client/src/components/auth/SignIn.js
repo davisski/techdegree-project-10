@@ -17,6 +17,14 @@ class SignIn extends Component{
         errors: [],
         errorType: 'Validation'
     }
+    componentDidMount(){
+        console.log(this.props)
+        const {context, history} = this.props;
+
+        if(context.authenticatedUser){
+            history.push('/');
+        }
+    }
     render(){
         const {emailAddress, password, errors, errorType} = this.state;
         return (
@@ -74,7 +82,7 @@ class SignIn extends Component{
     submit = (e) => {
         e.preventDefault();
         
-        const {context} = this.props;
+        const {context, history, location} = this.props;
 
         // pull out properties
         const {
@@ -90,7 +98,11 @@ class SignIn extends Component{
             // handle promise
             context.actions.signIn(emailAddress, password).then(user => {
                 if(user){
-                    this.props.history.goBack(-1);
+                    if(location.state.from !== undefined){
+                        history.push(location.state.from.pathname);
+                    }else{
+                        history.goBack(-1);
+                    }
                 }
             // handle error
             }).catch(error => {

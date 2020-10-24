@@ -19,10 +19,11 @@ class CreateCourse extends Component{
     componentDidMount(){
         const {context} = this.props;
 
+        
         // cheks if user is not autheticated then redirect to signin route
-        if(!context.authenticatedUser){
-            this.props.history.push('/signin');
-        }
+        // if(!context.authenticatedUser){
+        //     this.props.history.push('/signin');
+        // }
     }
     render(){
         // pull out properties from state object 

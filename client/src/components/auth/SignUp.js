@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {NavLink} from "react-router-dom";
 import ErrorContainer from "../error/ErrorContainer";
+import Cookies from 'js-cookie';
 
 /**
  * @extends {CourseDetail} - Extends react stateful component.
@@ -19,11 +20,11 @@ class SignUp extends Component{
         errors: []
     }
     componentDidMount() {
-        const {context} = this.props;
+        const {context, history} = this.props;
 
         // if user already authenticated then redirect
-        if(context.authenticatedUser !== null){
-            this.props.history.push("/");
+        if(context.authenticatedUser){
+            history.push("/");
         }
     }
     render(){
@@ -94,7 +95,7 @@ class SignUp extends Component{
     submit = (e) => {
         e.preventDefault();
        
-       const {context} = this.props;
+       const {context, history, location} = this.props;
 
        // pull out properties from state object
        const {firstName, lastName, emailAddress, password, confirmPassword} = this.state;
@@ -111,11 +112,21 @@ class SignUp extends Component{
        // checks if confirmedPassword is equal to password, if it is then create new user
        if(user.confirmPassword === user.password){
         // handle promise
-        context.data.createUser(user).then(user => {
-            if(user){
-                this.resetForm();
-                this.props.history.push('/signin');
-            }
+        context.data.createUser(user).then(() => {
+            // resets form
+           this.resetForm();
+             //handle promise
+            context.actions.signIn(user.emailAddress, user.password).then(user => {
+                if(user){
+                    history.push("/")
+                }
+            }).catch(error => {
+                if(error.status === 500){
+                    history.push('/error');
+                }
+            })
+
+
             // handle errors
         }).catch(errors => {
             if(errors.response.status === 400){
@@ -125,7 +136,7 @@ class SignUp extends Component{
                     }
                 })
             }else if(errors.response.status === 500){
-                this.props.history.push('/error');
+                history.push('/error');
             }
         })
        }else{

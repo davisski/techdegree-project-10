@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, Link} from "react-router-dom";
 
 /**
  * @extends {Header} - React pure component, which updates himself base on prop and state comparison.
@@ -7,7 +7,7 @@ import {NavLink} from "react-router-dom";
 class Header extends PureComponent{
   render(){
     // object destructuring
-    const {context} = this.props;
+    const {context, location} = this.props;
     const authUser = context.authenticatedUser;
     return (
       <div className="header">
@@ -21,7 +21,7 @@ class Header extends PureComponent{
               <span>Welcome {authUser.firstName} {authUser.lastName}</span><NavLink className="signout" to={`/signout`}>Sign Out</NavLink>
             </Fragment> :
             <Fragment>
-              <NavLink className="signup" to={`/signup`}>Sign Up</NavLink><NavLink className="signin" to={`/signin`}>Sign In</NavLink>
+              <NavLink className="signup" to={`/signup`}>Sign Up</NavLink><Link className="signin" to={{pathname: '/signin', state: {from: location}}}>Sign In</Link>
             </Fragment>
         }
       </nav>
