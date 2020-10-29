@@ -4,9 +4,11 @@
  * Load modules
  */
 const express = require("express");
+const path = require("path");
 const morgan = require("morgan");
 const cors = require('cors');
 const { sequelize } = require("./models");
+
 
 /**
  * @const {enableGlobalErrorLogging} - Variable to enable global error logging.
@@ -21,7 +23,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+app.use(express.static(path.join(__dirname, "../client/build")))
 /**
  * Setup morgan which gives us http request logging.
  */

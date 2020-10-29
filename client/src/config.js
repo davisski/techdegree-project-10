@@ -1,3 +1,3 @@
 export default {
-    apiBaseUrl: "http://localhost:5000/api"
+    apiBaseUrl: "https://davisski-api-react.herokuapp.com/api"
 }
