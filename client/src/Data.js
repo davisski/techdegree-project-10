@@ -32,6 +32,7 @@ export default class Data {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': "*"
             }
         }
         // if body not null
