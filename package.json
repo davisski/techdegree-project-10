@@ -4,7 +4,7 @@
   "description": "Full Stack application with REACT and REST API",
   "scripts": {
     "start": "node api",
-    "build": "cd client && npm install && npm run build"
+    "build": "cd client && npm install && npm run build && cd /api && npm install && npm start"
   },
   "repository": {
     "type": "git",
