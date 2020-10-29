@@ -1,0 +1,20 @@
+{
+  "name": "techdegree-project-10",
+  "version": "1.0.0",
+  "description": "Full Stack application with REACT and REST API",
+  "scripts": {
+    "start": "node api",
+    "build": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davisski/techdegree-project-10.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davisski/techdegree-project-10/issues"
+  },
+  "homepage": "https://github.com/davisski/techdegree-project-10#readme"
+}
